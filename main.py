@@ -41,7 +41,7 @@ class FetchThread(QThread):
                     self.fetch_finished.emit(data)
                     return
             except Exception as e:
-                print(f"[yiyan] 请求失败: {e}")
+                print(f"[daily.quote] 请求失败: {e}")
             retry_count += 1
             self.msleep(2000)
         self.fetch_failed.emit()
@@ -51,7 +51,7 @@ class Plugin(CW2Plugin):
     """每日一言小组件"""
 
     # 内容/作者/状态任一变化都会通知 QML
-    yiyanChanged = Signal()
+    dailyQuoteChanged = Signal()
 
     def __init__(self, api: PluginAPI):
         super().__init__(api)
@@ -85,9 +85,9 @@ class Plugin(CW2Plugin):
     def _get_status(self):
         return self._status
 
-    yiyanContent = Property(str, _get_content, notify=yiyanChanged)
-    yiyanAuthor = Property(str, _get_author, notify=yiyanChanged)
-    yiyanStatus = Property(str, _get_status, notify=yiyanChanged)
+    dailyQuoteContent = Property(str, _get_content, notify=dailyQuoteChanged)
+    dailyQuoteAuthor = Property(str, _get_author, notify=dailyQuoteChanged)
+    dailyQuoteStatus = Property(str, _get_status, notify=dailyQuoteChanged)
 
     def _setup_daily_timer(self):
         """计算并启动下一次 1 点的单次定时器"""
@@ -96,7 +96,7 @@ class Plugin(CW2Plugin):
         if now >= next_update:
             next_update += timedelta(days=1)
         self._daily_timer.start(int((next_update - now).total_seconds() * 1000))
-        print(f"[yiyan] 下次自动更新: {next_update.strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"[daily.quote] 下次自动更新: {next_update.strftime('%Y-%m-%d %H:%M:%S')}")
 
     def daily_update(self):
         """每日 1 点触发"""
@@ -108,7 +108,7 @@ class Plugin(CW2Plugin):
     def refresh(self):
         """开始异步抓取每日一言"""
         self._status = "loading"
-        self.yiyanChanged.emit()
+        self.dailyQuoteChanged.emit()
         self._retry_timer.stop()
 
         if self._fetch_thread and self._fetch_thread.isRunning():
@@ -124,32 +124,32 @@ class Plugin(CW2Plugin):
         self._author = data.get("author", "未知作者")
         self._status = "ok"
         self._last_update_date = datetime.now().date()
-        self.yiyanChanged.emit()
-        print(f"[yiyan] 更新成功: {self._author}")
+        self.dailyQuoteChanged.emit()
+        print(f"[daily.quote] 更新成功: {self._author}")
 
     def _on_failure(self):
-        print("[yiyan] 重试3次失败，5分钟后自动重试")
+        print("[daily.quote] 重试3次失败，5分钟后自动重试")
         self._content = ""
         self._author = ""
         self._status = "error"
-        self.yiyanChanged.emit()
+        self.dailyQuoteChanged.emit()
         self._retry_timer.start(5 * 60 * 1000)
 
     def on_load(self):
         super().on_load()
         self.api.widgets.register(
-            widget_id="com.yiyan.component",
+            widget_id="com.daily.quote.component",
             name="每日一言",
-            qml_path="qml/yiyan.qml",
+            qml_path="qml/daily-quote.qml",
             backend_obj=self,
-            settings_qml="qml/yiyan-settings.qml",
+            settings_qml="qml/daily-quote-settings.qml",
             default_settings={
                 "auto_scroll": True,  # 内容超长时自动滚动
                 "scroll_speed": 20,   # 滚动速度（像素/秒），默认较慢
                 "scroll_pause": 1200, # 每轮循环结束后的停留时间（毫秒）
             },
         )
-        print("[yiyan] 插件已加载")
+        print("[daily.quote] 插件已加载")
 
     def on_unload(self):
         self._retry_timer.stop()
@@ -157,4 +157,4 @@ class Plugin(CW2Plugin):
         if self._fetch_thread and self._fetch_thread.isRunning():
             self._fetch_thread.quit()
             self._fetch_thread.wait(2000)
-        print("[yiyan] 插件已卸载")
+        print("[daily.quote] 插件已卸载")

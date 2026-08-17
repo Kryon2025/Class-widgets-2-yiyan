@@ -1,5 +1,5 @@
 [project]
-name = "com-yiyan-component"
+name = "com-daily-quote-component"
 version = "2.0.0"
 description = "A daily quote widget for Class Widgets 2."
 authors = [
