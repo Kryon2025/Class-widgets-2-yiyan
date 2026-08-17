@@ -1,9 +1,9 @@
 [project]
-name = "com-laoshuikaixue-yiyan"
+name = "com-yiyan-component"
 version = "2.0.0"
-description = "A daily quote widget for Class Widgets 2, upgraded from the Class Widgets 1 plugin."
+description = "A daily quote widget for Class Widgets 2."
 authors = [
-    {name = "LaoShui"},
+    {name = "松峰"},
 ]
 readme = "README.md"
 requires-python = ">=3.9"

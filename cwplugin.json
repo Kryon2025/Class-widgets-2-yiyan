@@ -1,12 +1,11 @@
 {
-  "id": "com.laoshuikaixue.yiyan",
+  "id": "com.yiyan.component",
   "name": "每日一言",
   "version": "2.0.0",
   "api_version": "~=0.4.2",
   "entry": "main.py",
-  "author": "LaoShui",
+  "author": "松峰",
   "description": "每天分享一句话，激励大家学习。",
-  "url": "https://github.com/laoshuikaixue/cw-yiyan-plugin",
   "readme": "README.md",
   "icon": "icon.png"
 }

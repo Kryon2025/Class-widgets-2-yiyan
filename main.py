@@ -1,7 +1,6 @@
 """
 每日一言
-Class Widgets 2 每日一言插件，由 Class Widgets 1 版（cw-yiyan-plugin，作者 LaoShui）升级而来。
-每天从 api.codelife.cc 获取一句话，激励大家学习。
+Class Widgets 2 每日一言插件，每天从 api.codelife.cc 获取一句话。
 """
 
 import json
@@ -21,7 +20,7 @@ HEADERS = {
 
 
 class FetchThread(QThread):
-    """后台抓取线程（与原版一致：最多重试 3 次，间隔 2 秒）"""
+    """后台抓取线程（最多重试 3 次，间隔 2 秒）"""
 
     fetch_finished = Signal(dict)
     fetch_failed = Signal()
@@ -139,7 +138,7 @@ class Plugin(CW2Plugin):
     def on_load(self):
         super().on_load()
         self.api.widgets.register(
-            widget_id="com.laoshuikaixue.yiyan",
+            widget_id="com.yiyan.component",
             name="每日一言",
             qml_path="qml/yiyan.qml",
             backend_obj=self,
