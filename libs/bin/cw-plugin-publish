@@ -1,0 +1,6 @@
+#!/opt/hostedtoolcache/Python/3.14.6/x64/bin/python
+import sys
+from ClassWidgets.SDK.tools.publisher import publish_plugin
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(publish_plugin())

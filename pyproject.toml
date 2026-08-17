@@ -1,0 +1,14 @@
+[project]
+name = "com-laoshuikaixue-yiyan"
+version = "2.0.0"
+description = "A daily quote widget for Class Widgets 2, upgraded from the Class Widgets 1 plugin."
+authors = [
+    {name = "LaoShui"},
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["class-widgets-sdk>=0.4.2"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
