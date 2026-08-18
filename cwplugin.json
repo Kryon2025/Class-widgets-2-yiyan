@@ -1,7 +1,7 @@
 {
  "id": "com.daily.quote",
  "name": "每日一言",
- "version": "v1.1.1",
+ "version": "v1.1.2",
  "api_version": "~=0.6.0",
  "entry": "main.py",
  "author": "松峰",
