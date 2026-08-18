@@ -12,6 +12,8 @@
 ## 开发
 
 ```
-pip install class-widgets-sdk
+pip install class-widgets-sdk>=0.6.0
 cw-plugin-pack
 ```
+
+插件基于 Class Widgets 2 SDK **0.6.0**（`api_version: ~=0.6.0`）。

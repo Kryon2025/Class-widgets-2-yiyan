@@ -4,7 +4,7 @@ Class Widgets 2 Plugin SDK (Runtime Tools)
 import sys
 from typing import TYPE_CHECKING
 
-__version__ = '0.4.2'
+__version__ = '0.6.0'
 __author__ = 'Class Widgets Official'
 
 if TYPE_CHECKING:
@@ -16,8 +16,13 @@ if TYPE_CHECKING:
         RuntimeAPI,
         ConfigAPI,
         AutomationAPI,
+        ActionsAPI,
         UiAPI,
         PluginAPI,
+        ScheduleManagementAPI,
+        GlobalConfigAPI,
+        ApplicationAPI,
+        DiagnosticsAPI,
     )
 
     from .plugin_base import CW2Plugin
@@ -33,7 +38,12 @@ else:
     RuntimeAPI = type('RuntimeAPI', (), {})
     ConfigAPI = type('ConfigAPI', (), {})
     AutomationAPI = type('AutomationAPI', (), {})
+    ActionsAPI = type('ActionsAPI', (), {})
     UiAPI = type('UiAPI', (), {})
+    ScheduleManagementAPI = type('ScheduleManagementAPI', (), {})
+    GlobalConfigAPI = type('GlobalConfigAPI', (), {})
+    ApplicationAPI = type('ApplicationAPI', (), {})
+    DiagnosticsAPI = type('DiagnosticsAPI', (), {})
 
 __all__ = [
     'CW2Plugin', 
@@ -46,7 +56,12 @@ __all__ = [
     'RuntimeAPI',
     'ConfigAPI',
     'AutomationAPI',
+    'ActionsAPI',
     'UiAPI',
+    'ScheduleManagementAPI',
+    'GlobalConfigAPI',
+    'ApplicationAPI',
+    'DiagnosticsAPI',
     '__version__', 
     '__author__'
 ]

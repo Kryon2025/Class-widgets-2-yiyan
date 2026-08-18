@@ -1,12 +1,12 @@
 {
-  "id": "com.daily.quote",
-  "name": "每日一言",
-  "version": "v1.1.0",
-  "api_version": "~=0.4.2",
-  "entry": "main.py",
-  "author": "松峰",
-  "description": "每天分享一句话，激励大家学习。",
-  "url":"https://github.com/Kryon2025/Class-widgets-2-yiyan.git",
-  "readme": "README.md",
-  "icon": "icon.png"
+ "id": "com.daily.quote",
+ "name": "每日一言",
+ "version": "v1.1.1",
+ "api_version": "~=0.6.0",
+ "entry": "main.py",
+ "author": "松峰",
+ "description": "每天分享一句话，激励大家学习。",
+ "url": "https://github.com/Kryon2025/Class-widgets-2-yiyan.git",
+ "readme": "README.md",
+ "icon": "icon.png"
 }
