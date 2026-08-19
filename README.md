@@ -1,6 +1,6 @@
 # 每日一言（Class Widgets 2）
 
-每天从 `https://api.codelife.cc/yiyan/info?lang=cn` 获取一句话并展示。
+每天从 `https://api.codelife.cc/yiyan/info?lang=cn` 获取一句话并展示。此插件由Deepseek V4 Flash开发。
 
 ## 功能
 
@@ -16,4 +16,4 @@ pip install class-widgets-sdk>=0.6.0
 cw-plugin-pack
 ```
 
-插件基于 Class Widgets 2 SDK **0.6.0**（`api_version: ~=0.6.0`）。
+插件基于 Class Widgets 2 SDK **0.6.0**
