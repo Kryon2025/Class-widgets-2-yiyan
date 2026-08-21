@@ -111,13 +111,23 @@ class Plugin(CW2Plugin):
         self.dailyQuoteChanged.emit()
         self._retry_timer.stop()
 
-        if self._fetch_thread and self._fetch_thread.isRunning():
-            return  # 已有请求在进行中
+        if self._fetch_thread:
+            if self._fetch_thread.isRunning():
+                return  # 已有请求在进行中
+            self._fetch_thread.deleteLater()
+            self._fetch_thread = None
 
         self._fetch_thread = FetchThread(self)
         self._fetch_thread.fetch_finished.connect(self._on_success)
         self._fetch_thread.fetch_failed.connect(self._on_failure)
+        self._fetch_thread.finished.connect(self._on_fetch_thread_finished)
         self._fetch_thread.start()
+
+    def _on_fetch_thread_finished(self):
+        """线程结束后释放对象引用，避免反复刷新时线程对象累积"""
+        if self._fetch_thread:
+            self._fetch_thread.deleteLater()
+            self._fetch_thread = None
 
     def _on_success(self, data):
         self._content = data.get("content", "无法获取一言信息。")
@@ -154,7 +164,18 @@ class Plugin(CW2Plugin):
     def on_unload(self):
         self._retry_timer.stop()
         self._daily_timer.stop()
-        if self._fetch_thread and self._fetch_thread.isRunning():
-            self._fetch_thread.quit()
-            self._fetch_thread.wait(2000)
+        if self._fetch_thread:
+            thread = self._fetch_thread
+            # 先断开信号，卸载后即使线程结束也不会再回调已销毁的插件
+            try:
+                thread.fetch_finished.disconnect(self._on_success)
+                thread.fetch_failed.disconnect(self._on_failure)
+                thread.finished.disconnect(self._on_fetch_thread_finished)
+            except RuntimeError:
+                pass
+            thread.requestInterruption()
+            if thread.isRunning():
+                # 最多等当前请求超时（15 秒）；多数情况下线程并不在运行，立即返回
+                thread.wait(15000)
+            self._fetch_thread = None
         print("[daily.quote] 插件已卸载")
