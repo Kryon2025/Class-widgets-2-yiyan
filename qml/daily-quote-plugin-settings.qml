@@ -18,6 +18,7 @@ PluginPage {
     property bool showAuthor: true
     property string deskLayer: "bottom"
     property string deskFontFamily: ""
+    property int deskFontSize: 20
     property bool syncing: false
 
     Component.onCompleted: reload()
@@ -37,6 +38,7 @@ PluginPage {
         page.showAuthor = c.showAuthor !== false
         page.deskLayer = c.layer || "bottom"
         page.deskFontFamily = c.fontFamily || ""
+        page.deskFontSize = c.fontSize !== undefined ? c.fontSize : 20
         page.syncing = false
     }
 
@@ -49,7 +51,8 @@ PluginPage {
             "bgOpacity": page.bgOpacity,
             "showAuthor": page.showAuthor,
             "layer": page.deskLayer,
-            "fontFamily": page.deskFontFamily
+            "fontFamily": page.deskFontFamily,
+            "fontSize": page.deskFontSize
         }))
     }
 
@@ -146,6 +149,38 @@ PluginPage {
                     var saved = page.deskFontFamily !== "" ? page.deskFontFamily : mainFont
                     var i = model.indexOf(saved)
                     currentIndex = i >= 0 ? i : 0
+                }
+            }
+        }
+
+        SettingCard {
+            Layout.fillWidth: true
+            title: qsTr("字体大小")
+            description: qsTr("桌面一言的主文字号（10 ~ 72 px）。作者与翻译按比例缩小。")
+            enabled: page.deskEnabled
+
+            RowLayout {
+                spacing: 8
+                Button {
+                    text: qsTr("−")
+                    implicitWidth: 36
+                    onClicked: {
+                        page.deskFontSize = Math.max(10, page.deskFontSize - 1)
+                        page.push()
+                    }
+                }
+                Text {
+                    Layout.preferredWidth: 70
+                    horizontalAlignment: Text.AlignHCenter
+                    text: page.deskFontSize + " px"
+                }
+                Button {
+                    text: qsTr("+")
+                    implicitWidth: 36
+                    onClicked: {
+                        page.deskFontSize = Math.min(72, page.deskFontSize + 1)
+                        page.push()
+                    }
                 }
             }
         }
