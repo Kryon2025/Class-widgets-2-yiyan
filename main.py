@@ -35,8 +35,37 @@ SOURCES = {
 }
 
 _PLUGIN_DIR = Path(__file__).resolve().parent
-_DESK_CFG = _PLUGIN_DIR / ".desktop.json"
-_ROT_CFG = _PLUGIN_DIR / ".rotation.json"
+
+
+def _data_dir() -> Path:
+    """插件用户数据目录：<主程序根>/configs/plugins/<插件ID>。
+
+    不能写进插件自己的目录：覆盖更新会把 plugins/<插件ID>/ 整个替换掉，
+    桌面一言/轮播的配置会跟着消失。configs/ 归主程序管，更新插件不会动它。
+    """
+    try:
+        d = Path(__file__).resolve().parent.parent.parent / "configs" / "plugins" / "com.daily.quote"
+        d.mkdir(parents=True, exist_ok=True)
+        return d
+    except Exception:
+        return Path(__file__).resolve().parent
+
+
+def _data_file(name: str) -> Path:
+    """数据文件路径；顺带把旧版写在插件目录里的同名文件迁移一次。"""
+    old = Path(__file__).resolve().parent / name
+    new = _data_dir() / name
+    try:
+        if old.exists() and not new.exists():
+            new.parent.mkdir(parents=True, exist_ok=True)
+            new.write_bytes(old.read_bytes())
+    except Exception:
+        pass
+    return new
+
+
+_DESK_CFG = _data_file(".desktop.json")
+_ROT_CFG = _data_file(".rotation.json")
 
 
 def _extract(sid, body):
