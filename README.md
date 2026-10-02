@@ -1,6 +1,20 @@
-# 每日一言（Class Widgets 2）
+<div align="center">
 
-桌面组件 + 桌面一言，支持中文一言、英文一言（含译文）、诗词三个来源，可轮播。此插件由 Deepseek V4开发。
+<img src="icon.png" height="120" alt="每日一言">
+<h1>每日一言（Class Widgets 2）</h1>
+
+<p>桌面组件 + 桌面一言，支持中文一言、英文一言（含译文）、诗词三个来源，可轮播。此插件由 Deepseek V4开发。</p>
+
+[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-1.2.2-5A9BFF?style=for-the-badge)](https://github.com/Kryon2025/Class-widgets-2-yiyan/releases)
+[![星标](https://img.shields.io/github/stars/Kryon2025/Class-widgets-2-yiyan?style=for-the-badge&color=orange&label=%E6%98%9F%E6%A0%87)](https://github.com/Kryon2025/Class-widgets-2-yiyan)
+[![开源许可](https://img.shields.io/github/license/Kryon2025/Class-widgets-2-yiyan?style=for-the-badge&label=%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81)](https://github.com/Kryon2025/Class-widgets-2-yiyan/blob/main/LICENSE)
+[![下载量](https://img.shields.io/github/downloads/Kryon2025/Class-widgets-2-yiyan/total.svg?label=%E4%B8%8B%E8%BD%BD%E9%87%8F&color=green&style=for-the-badge)](https://github.com/Kryon2025/Class-widgets-2-yiyan/releases)
+
+</div>
+
+> [!NOTE]
+> 当前版本 **1.2.2**，要求 Class Widgets 2 的插件 API `~=0.6.0`。
+> 在 [插件广场](https://plaza.cw.rinlit.cn/plugins/com.daily.quote) 可以一键安装/更新，也可以在 Release 页下载 `.cwplugin` 手动导入。
 
 ## 功能
 
