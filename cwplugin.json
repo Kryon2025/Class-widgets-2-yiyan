@@ -1,8 +1,8 @@
 {
  "id": "com.daily.quote",
  "name": "每日一言",
- "version": "1.2.2", 
- "api_version": "~=0.6.0",
+ "version": "1.2.3", 
+ "api_version": "~=0.7.0",
  "entry": "main.py",
  "author": "松峰",
  "description": "每日一句，点亮今天的学习。",

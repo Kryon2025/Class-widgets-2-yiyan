@@ -13,7 +13,7 @@
 </div>
 
 > [!NOTE]
-> 当前版本 **1.2.2**，要求 Class Widgets 2 的插件 API `~=0.6.0`。
+> 当前版本 **1.2.2**，要求 Class Widgets 2 的插件 API `~=0.7.0`。
 > 在 [插件广场](https://plaza.cw.rinlit.cn/plugins/com.daily.quote) 可以一键安装/更新，也可以在 Release 页下载 `.cwplugin` 手动导入。
 
 ## 功能
@@ -37,8 +37,18 @@
 ## 开发
 
 ```
-pip install class-widgets-sdk>=0.6.0
+pip install class-widgets-sdk>=0.7.0
 cw-plugin-pack
 ```
 
-插件基于 Class Widgets 2 SDK **0.6.0**。
+插件基于 Class Widgets 2 SDK **0.7.0**。
+
+
+## SDK 版本
+
+插件适配 Class Widgets 2 SDK **0.7.0**，`cwplugin.json` 中 `api_version` 为 `~=0.7.0`
+（PEP 440 兼容版本号，等价于 `>=0.7.0, <0.8.0`），基于官方 `ClassWidgets.SDK` 接口
+（`CW2Plugin` / `PluginAPI`）。
+
+0.7.0 相对 0.6.0 是纯增量：新增 `globalconfig`（锁/解锁）、`actions`、`schedulemanagement`、
+`application`、`diagnostics` 等接口与 UI 快捷键能力，原有接口无破坏性变更。
